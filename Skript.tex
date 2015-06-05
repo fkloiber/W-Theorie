@@ -1,0 +1,1029 @@
+\documentclass[parskip = full, 12pt]{scrartcl}
+
+\input{preambel.tex}
+
+\title{Einführung in die Wahrscheinlichkeitstheorie und Statistik}
+\author{Prof. Dr. Niko Naumann}
+\date{\today{}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Erinnerungen an die Maßtheorie} 
+\label{s: 1.Erinnerungen an die Masstheorie}
+
+\colorsubsection[Blue]{Defintion}
+\label{ss: Definition 1.1}
+	Sei $\Om$ eine Menge, $\Pot(\Om) := \{A\ |\ A \subseteq \Om\}$ die Potenzmenge 
+	von $\Om$ auf $\sA \in \Pot(\Om)$.
+	\begin{enumerate}[label={\alph*)}]
+		\item $\sA$ heißt $\bm{\sigma}$\textbf{-Algebra} (auf $\Om$), falls gelten:
+			\begin{enumerate}[label={\roman*)}]
+				\item $\emptyset \in \sA$
+				\item $\forall A \in \sA$ gilt $A^C := \{ \om \in \Om\ |\ \om \notin A\} 
+				  \in \sA$
+				\item $\forall A_n \in \sA (n \in \Nat)$ gilt $\bigcup_n A_n \in 
+				  \sA$
+			\end{enumerate}
+			Ein \textbf{Messraum} ist ein Paar $(\Om, \sA)^{n \in \Nat}$ bestehend aus 
+			einer Menge $\Om$ und einer $\sA \in \Pot(\Om)$.
+		\item Falls in a) statt iii) nur gilt:
+			\begin{enumerate}[label={\roman**)}] \setcounter{enumii}{2}
+				\item Für $A,B \in \sA$ gilt $A \cup B \in \sA$ 
+			\end{enumerate}
+			so heißt $\sA$ eine \textbf{Algebra} (auf $\Om$)
+		\item Falls in a) statt iii) nur gilt:
+			\begin{enumerate}[label={\roman***)}]
+			\setcounter{enumii}{2}
+				\item Falls $A_n \in \sA (n \in \Nat)$ paarweise disjunkt sind (d.h. 
+				$A_m \cap A_n \neq \emptyset$ für $n \neq m$), dann ist $\bigcupdot
+				_{n \in \Nat} A_n \in \sA$
+			\end{enumerate}
+			so heißt $\sA$ ein \textbf{Dynkin System}.
+	\end{enumerate}
+
+\colorsubsection[Blue]{Bemerkung \& Definition}
+\label{ss: Bemerkung und Definition 1.2}
+	\begin{enumerate}[label={\alph*)}]
+		\item Die größte $\sigma$-Algebra auf $\Om$ ist $\Pot(\Om)$, die kleinste 
+			ist $\{\emptyset,\Om\}$. Falls $I \neq \emptyset$ eine Menge und für jedes 
+		  $i \in I\ \sA_i \subseteq \Pot(\Om)$ eine $\sigma$-Algebra ist, so auch 
+		  $\bigcap_{i \in \Nat}	\sA_i \subseteq \Pot(\Om)$.\\
+			Sei $\sE \subseteq \Pot(\Om)$ beliebig, dann ist $$\sigma(\sE) := \bigcap 
+			\{ \sA\ |\ \sA \subseteq \Pot(\Om) \textrm{ ist eine } \sigma \textrm{
+			-Algebra mit } \sE \subseteq \sA \} \subseteq \Pot \Om$$ die kleinste 
+			$\sigma$-Algebra, die $\sE$ enthält (\textbf{die von $\sE$ erzeugte 
+			$\sigma$-Algebra)}. Analog existieren ein kleinstes Dynkin-System 
+			$\sD(\sE)$ und eine kleinste Algebra, die $\sE$ die enthalten.\\
+			Die von $\sE$ erzeugte Algebra kann man angeben, nämlich $\{\bigcupdot
+			_{i=1}^n \bigcapdot_{j=1}^n A_{ij}\ | \ A_{ij} \in \sE \cup	
+			\sE^C ,n \geq I \}$, wobei $\sE^C := \{ A^C \ |\ A \in \sE$. Für $\sigma$
+			-Algebren gilt nichts analoges.
+		\item Ein \textbf{Ring} (auf $\Om$) ist eine Teilmenge $\sA \subseteq 
+		  \Pot(\Om)$ mit i) iii*) und ii*) Für alle $A, B \in \sA$ ist $A\backslash 
+		  B \in \sA$.  
+	\end{enumerate}
+
+\colorsubsection[Orange]{Lemma}
+\label{ss: Lemma 1.3}
+	\begin{enumerate}[label = {\alph*)}]
+	  \item Ein $\cap$-stabiles Dynkin-System ist eine $\sigma$-Algebra.
+	  \item \textbf{(Dynkin-Lemma)} Sei $\sE \in \Pot(\Omega) \ \cap$-stabil,  
+	    dann ist $\sD(\sE)  = \sigma(\sE)$ 
+	\end{enumerate}
+	\textbf{Beweis}: Kommt später!
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definition 1.4}
+	\begin{enumerate}
+		\item Sei $(\Om, \sA)$ ein Messraum. Dann heißt eine Abbildung $\mu: \sA 
+			\rightarrow [0,\infty] := [0,\infty) \cupdot \{\infty\}$ ein 
+			\textbf{Maß} (auf ($\Om, \sA$), falls gelten:
+			\begin{enumerate}
+				\item $\mu(\emptyset) = 0$
+				\item $\sigma$-Additivität: Für alle $(\sA)_{n \geq 1} \subseteq 
+					\sA$ mit $A_n \cap A_m = \emptyset$ für $n \neq m$ gilt $\mu 
+					( \bigcupdot_{n \geq 1} A_n) = \sum_{n \geq 1} \mu(A_n)$
+			\end{enumerate}
+		\item Ein Maß $\mu$ heißt 
+			\begin{enumerate}
+				\item \textbf{endlich} $:\Leftrightarrow \mu(\Om) \leq \infty$
+				\item $\bm{\sigma}$\textbf{-finit} $:\Leftrightarrow$ Es exisitiert 
+					eine Folge ${(A_n)}_{n \geq 1} \subseteq \sA$ mit $\mu(A_n) \leq 
+					 \infty\ \forall n \leq 1$ und $\bigcup_{n \geq 1} A_n = 
+					 \Om$
+				\item \textbf{Wahrscheinlichkeitsmaß} (W-Maß), falls gilt $\mu(\Om)
+					= 1$. 
+			\end{enumerate}
+		\item Sei $\sA$ ein Ring auf $\Om$, dann heißt eine Abbildung $\mu: \sA 
+			\rightarrow [0, \infty]$ ein \textbf{Inhalt}, falls gelten:
+			\begin{enumerate}
+				\item $\mu(\emptyset) = 0$
+				\item $\mu(A \cup B) = \mu(A) + \mu(B)\ \forall A,B \in \sA$ mit $A 
+				\cap B = \emptyset$ \textbf{(endliche Additivität)}.
+			\end{enumerate}
+	\end{enumerate}
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispeil 1.5}
+	\begin{enumerate}
+		\item \textbf{Dirac-Maß}: Zu $x \in \Om$ definiere für alle $A \in \Pot(\Om)
+			:\delta_x(A) := \left \{ 
+				\begin{tabular}{cl}
+				1, & $x \in A$\\
+				0, & $x \notin A$
+				\end{tabular}
+			\right. $. Dann ist ein $\delta_x$ ein Maß auf $\Pot(\Om)$ (und damit 
+			auf jeder $\sigma$-Algebra auf $\Om$).
+		\item \textbf{Elementargeometrischer Inhalt}: Betrachte $\sE := \{ (a,b]\ 
+			|\ \leq a \leq b \leq +\infty \} \subseteq \Pot(\Om := \Real)$ und $\sR 
+			:= \{ \bigcupdot_{i=1}^n A_i\ |\ A_i \in \sE, A_i \cap A_j \neq 
+			\emptyset$ für $i \neq j, n \geq 1\} \subseteq \Pot(\Real)$. Dann ist 
+			$\sR$ ein Ring. Setzte $\lambda(\bigcup_{i=1}^n A_i := \sum
+			_{i = 1}^n (b_i - a_i)$ für $A_i = (a_i, b_i] \in \sE$ paaarweise
+			disjunkt. Dann ist $\lambda: \Real \rightarrow [0, \infty)$ ein Inhalt.
+		\item Sei $\Om = \Nat, \sA := \{A \subseteq \Nat\ |\ A$ oder $A^C$ ist 
+			endlich \} und $$\mu(\sA) := \left \{
+				\begin{tabular}{cl}
+				0, & $A$ endlich \\
+				1, & $A^C$ endlich
+				\end{tabular}
+			\right. {\forall A \in \sA}$$. Dann ist $\sA$ eine Algebra auf $\Nat$. 
+			Und $\mu$ ist ein Inhalt auf $\sA$, aber $\sA$ ist keine 
+			$\sigma$-Algebra (und $\mu$ ist nicht $\sigma$-additiv).
+		\item \textbf{Zählmaß}: Für $A \subseteq \Om$ definiere $\mu(A) := \left \{
+				\begin{tabular}{cl}
+				$|A|$, 		& falls $A \leq \infty$ \\
+				$\infty$,	& sonst
+				\end{tabular}
+			\right.$. Dann ist $\mu$ ein Maß auf $\Pot(\Om)$, welches genau dann 
+			$\sigma$-finit ist, wenn $\Om$ abzählbat ist.
+	\end{enumerate}
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss:  Bemerkung 1.6}
+	Sei $\mu$ ein Inhalt auf einem Ring $\sA$. Dann gelten:
+	\begin{enumerate}
+		\item $\mu$ ist \textbf{monoton}, d.h. für $A,B \in \sA$ mit $A \subseteq B$
+			gilt $\mu(A) \leq \mu(B)$
+		\item $\mu$ ist \textbf{subtraktiv}, d.h. für $A,B \in \sA$ mit $A \in B$ 
+			und	$\mu(A) \leq \infty$ gilt $\mu(B \backslash A) = \mu(B) - \mu(A)$
+		\item $\mu$ ist \textbf{subadditiv}, d.h. für $A_1,...,A_n \in \sA$ gilt
+			$\mu (\bigcup_{i=1}^n A_i) \leq \sum_{i=1}^n \mu(A_i)$
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 1.7}
+	Sei $\mu$ ein Inhalt auf einem Ring $\sA$. Betrachte folgende Aussagen:
+	\begin{enumerate}
+		\item $\mu$ ist $\sigma$-additiv
+		\item Für alle $\{A_1,A_2,...\} \subseteq \sA$ mit $A_1 \subseteq A_2 
+			\subseteq ...$ und $A := \bigcup_{n \geq 1} A_n \in \sA$ gilt 
+			$\mu(A) =\lim_{n \rightarrow \infty} \mu(A_n)$ (d.h. $\mu$ 
+			ist \textbf{stetig von unten}). 
+		\item Für alle $\{A_1,A_2,...\} \subseteq \sA$ mit $A_1 \supseteq A_2 
+			\supseteq ..., \bigcap_{n \geq 1} A_n = \emptyset$ und $\mu(A_1)
+			\leq \infty$ gilt $\lim_{n \rightarrow \infty} \mu(A_n) = 0$ 
+			(d.h.) $\mu$ ist \textbf{stetig von oben}. Dann gilt $a) \Leftrightarrow
+			b) \Rightarrow c)$. Falls $\mu$ endlich ist, so gilt außerdem $c)
+			\Leftrightarrow b)$
+	\end{enumerate}
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Green]{Definition}
+\label{ss: Defintion 1.8}
+	Seien $\Om$ eine Menge, $\mu$ ein $\sigma$-additiver Inhalt auf einem Ring
+	$\sA \subseteq \Pot(\Om)$ und $B \subseteq \Om$
+	\begin{enumerate}
+		\item Es heißt $\mu^* : \Pot(\Om) \rightarrow [0, \infty]$, definiert durch
+			$$ \mu^*(B) := \left\{ 
+				\begin{tabular}{ccl}
+					$ \inf \{ \sum_{n \geq 1} \mu(A_n)\ |\ A_n \in \sA, B 
+					\subseteq \bigcup_{n \geq 1} A_n\} $ &,& falls $\{...\} 
+					\neq \emptyset$ \\
+					$\infty$ &,& sonst
+				\end{tabular}
+			\right. $$
+			\textbf{das dazugehörige Maß}.
+		\item Eine Menge $A \subseteq \Om$ heißt \textbf{maßlos}, falls gilt $\mu^*
+			(A) = \mu^*(A \cap B) + \mu^*(A \cap B^C)$ für alle $B \in \Pot(\Om)$
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 1.9}
+	\textbf{(Caratheodory)} Seien $\Om$ eine Menge und $\mu$ ein $\sigma$-additiver, 
+	$\sigma$-finiter Inhalt auf einem Ring $\sA$ auf $\Om$. Dann ist $\sigma(\sA)
+	\subseteq \overline{\sigma}(\sA) := \{ B \subseteq \Om\ |\ B $ messbar $\}$ 
+	eine $\sigma$-Algebra und $\mu^*|_{\overline{\sigma}(\sA)}$ ist ein Maß. Das 
+  Maß $\mu^*|_{\overline{\sigma}(\sA)}$ ist die einzige Maßfortsezung von $\mu$. 
+	(ohne Beweis) \\
+	Die $\sigma$-Algebra $\overline{\sigma}$ hat eine Bedeutung weiter unten.
+	(siehe Satz 1.11)
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definition 1.10}
+	Ein Maß $\mu$ auf einer $\sigma$-Algebra $\sA$ heoßt \textbf{vollständig}, 
+	falls gilt: Aus $A \subseteq B  \subseteq \Om, B \subseteq \sA$ und 
+	$\mu(B) = 0$ folgt $A \subseteq \sA$ (und natürlich $\mu(A) = 0$). Ein 
+	vollständiges Maß $\mu: A	\rightarrow [0, \infty]$ heißt \textbf{
+	Vervollständigung des Maßes} $\bm{\mu_0: \sA \rightarrow [0;\infty]}$, falls 
+	$\sA_0 \subseteq \sA,\ \mu|_{\sA_0} = \mu_0$ und folgende Eigenschaft gilt: 
+	Sei $\mu^*:\sA^* \rightarrow [0, \infty]$ eine vollständige Fortsetzung 
+	von $\mu_0$. Dann gelten $\sA \subseteq \sA^*$ und $\mu^*|_{\sA} = \mu$.\\
+	\textbf{Definiton:} In der Situation von 1.8) setze $d_{\mu^*}(A,B) := \mu^*
+	(A \Delta B)$ für alle $A, B \subseteq \Om$, wobei $A\Delta B := (A \backslash 
+	B) \cup (B \backslash A)$ die \textbf{symmetrische Differenz von A und B} ist.
+
+\colorsubsection[Red]{Satz} 
+\label{ss: Satz 1.11}   
+	Seien $\Om$ eine Menge, $\sA \subseteq \Pot(\Om)$ ein Ring und $\mu$ ein 
+	$\sigma$-finiter und $\sigma$-additiver Inhalt auf $\sA$. Dann gelten:
+	\begin{enumerate}
+		\item $\mu^*|_{\overline{\delta}(\sA)}$ ist die Vervollständigung von 
+			$\mu^*|_{\delta(\sA)}$
+		\item $ \overline{\delta}(\sA) := \{ B \in \Pot(\Om)\ |\ \forall \epsilon 
+			\geq 0\ \exists A \in \sA $ mit $d_{\mu^*}(A,B) \leq \epsilon \}$ 
+			(ohne Beweis)
+	\end{enumerate}			
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss: Bemerkung 1.12}
+	\begin{enumerate}
+		\item Die obigen Sätze besagen, dass ein $\sigma$-finiter und {$\sigma$
+			-additiver} Inhalt auf einem Ring eindeutig ein Maß auf der erzeugten 
+			$\sigma$-Algebra definiert. Das zum elementargeometrischen Inhalt 
+			(Beispiel 1.5.c) gehörige Maß heißt \textbf{Lebesgue-Maß} $\lambda$, die 
+			$\sigma$-Algebra ist die \textbf{Borel-Algebra} $\Bor(\Real)$. Die zur 
+			Vervollständigung gehörende $\sigma$-Algebra heißt \textbf{das System der
+			Lebesgue-messbaren Teilmengen auf $\Real$}.
+		\item Es gilt zB.: $\overline{\sigma}(\sA) = \{ A \Delta N\ |\ A \in \sigma
+			(\sA), N \subseteq \tilde{N} \in \sigma(\sA)$ mit $\mu(\tilde{N}) = 0 \}$.
+			Für das Lebesgue-Maß gilt: Die Kardinalität von $\Bor(\Real)$ ist die von
+			$\Real$, aber die Kardinalität der Lebesgue-messbaren Mengen ist 
+			(mindestens) $\lambda^{|\Real|}$ und damit echt größer, denn: es genügt,
+			eine Lebesgue-messbare Teilmenge $C \subseteq \Real$ zu finden, die 
+			überabzählbar ist (also |C| = $|Real|$) und für die $lambda = 0$ gilt. 
+			(Dann folgt $\Pot(C) \subseteq$ Lebesgue-messbar). Die Cantormenge C hat 
+			diese Eigenschaft.
+	\end{enumerate}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definiton 1.13}
+	Seien $(\Om, \sA)$ und $(S,\sS)$ Maßräume. Für eine Abbildung $X:\Om 
+	\rightarrow S$ definiere für $B \subseteq S $:
+	$$ X^{-1}(B) := \{ X \in B \} := \{ \om \in \Om\ |\ X(\om) \in B \} $$
+	Dann heißt X $\sA-\sS$-messbar, falls für alle $B \in \sS$ gilt $X^{-1}(B)
+	\in \sA$, d.h. es gilt \mbox{$X^{-1}(\sS) \in \sA$.}
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss: Bemerkung 1.14}
+	\begin{enumerate}
+		\item Jede konstante Abbildung is messbar bzgl. jeder $\sigma$-Algebra $\sA$
+			(denn $X^{-1}(B) \in \{ \emptyset, \Om \} \in \sA$).
+		\item Sind $X:(\Om, \sA) \rightarrow (S_1, \sS_1)$ und $Y:(S_1,\sS_1)
+			\rightarrow (S_2, \sS_2)$ messbar, so auch $Y~\circ~X (\Om, \sA) 
+			\rightarrow (S_2, \sS_2)$, denn $(Y \circ X)^{-1}(\sS_2) = X^{-1}(Y^{-1}
+			(\sS_2)) \symtext{\subseteq}{Y messbar} X^{-1}(\sS_1) \symtext{\subseteq}
+			{X messbar} \sA$
+	\end{enumerate}
+
+\colorsubsection[Orange]{Lemma}
+\label{ss: Lemma 1.15}
+  (Prüfen der Messbarkeit auf einem Erzeugendensystem). Seien $(\Om, \sA)$ und 
+  $(S,\sS)$ Maßräume auf $\sS = \sigma(\sE)$ für ein $\sE \subseteq \Pot(\sS)$ 
+  Dann ist eine Abbildung $X:\Om \rightarrow S$ genau dann $\sA-\sS-$messbar, 
+  wenn $X^{-1}(\sE) \subseteq \sA$ gilt.
+
+  \textbf{Beweis:} Kommt später!
+
+  \textbf{Beispiel:} Falls in 1.15 $(S,\sS) = (\Real, \Bor(\Real))$ oder $(S, 
+  \sS) = (\overline{\Real}, \overline{\Bor}(\Real))$ gilt, so folgt: Eine 
+   Abbildung $X:(\Om, \sA) \rightarrow (S,\sS)$ ist genau dann messbar wenn für 
+   alle $\alpha \in \Real$ gilt $\{ X \leq \alpha \} \in \sA = X^{-1}((-\infty, 
+   \alpha])$. (Beachte $\Bor (\Real) = \sigma(\{ (-\infty, \alpha]\ |\ \alpha 
+   \in \Real \})$ )
+
+\section{Zufallsexperiment und Wahrscheinlichkeit}
+\label{s: 2.Zufallsexperiment und Wahrscheinlichkeit}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definiton 2.1}
+	Ein \textbf{Zufallsexperiment} ist ein W-Raum $(\Om, \sA, P)$, d.h. ein
+	Maßraum mit $P(\Om) = 1$. Ḿan sagt:
+	\begin{enumerate}
+	 	\item Ein $\om \in \Om$ heißt \textbf{Ergebnis} des Experiments.
+	 	\item Ein $A \in \sA$ heißt \textbf{Ereignis} (die Wahl von $A$ ergibt
+	 		sich aus dem Experiment).
+	 	\item Für jedes $A \in \sA$ heißt $P(A)$ \textbf{die Wahrscheinlichkeit 
+	 		 für das Eintreten des Ereignisses} $A \in \sA$. Das Maß $P:\sA 
+	 		 \rightarrow [0,1]$	heißt die zum Experiment gehörige \textbf{
+	 		 Wahrscheinlichkeitsverteilung (W-Verteilung)}. 
+	 \end{enumerate} 
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss: Bemerkung 2.2}
+	\begin{enumerate}
+		\item Die Forderung, dass $\sA$ ein Algebra ist, ist naheliegend. Dabei 
+			entspricht $\emptyset$ dem unmmöglichen Ereignis, $A \cap B$ dem 
+			gleichzeitigen Eintreten von $A$ und $B$ und $A^C$ der logischen Negation
+			von A. Die Forderung, dass $P$ ein Inhalt ist, ist naheliegend wegen der 
+			Häufigkeitsinterpretation von Wahtscheinlichkeit. Die Bedingung, dass $\sA$
+			ein $\sigma$-Algebra und P ein Maß sind, ist eine mathematische 
+			Idealisierung (vgl. Satz 1.7, der dies als eine Stetigkeitseigenschaft 
+			charakterisiert).
+			\item Warum betrachtet man überhaupt $\sigma$-Algebren $\sA \subsetneqq
+			\Pot(\Om)$? Ein Satz von Ulan besagt, dass es kein W-Maß P auf $\Pot([0,1]
+			)$ mit $P\{x\} = 0$ für alle $x \in [0,1]$ gibt. Falls $\Om$ abzählbar ist
+			(insbesondere zB. endlich) ist, wird man immer $\sA = \Pot(\Om)$ wählen. 
+	\end{enumerate}
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 2.3}
+	\begin{enumerate}
+		\item \textbf{Laplace-Experiment:} Hier ist $|\Om| < \infty$, d.h. wir 
+			betrachten ein Experiment mit nur endlich vielen möglichen Ergebnissen,
+			$\sA = \Pot(\Om\cdot)$ und $P(A) = \frac{|A|}{|\Om|}$ für alle $A \in \Pot(\Om)
+			$. (Äquivalent: $\forall x \in \Om: P( \{x\} ) = \frac{1}{|\Om|}$.)
+		\item \textbf{Gleichverteilung auf dem Intervall $\bm{[a,b]}\ (-\infty < a
+			<	b < \infty)$:} Hier ist $\Om = [a,b],\ \sA = \Bor(\Om)$ und $P(A) = \frac
+			{\lambda(A)}{\lambda(\Om)}$ für alle $A \in \sA$.
+		\item \textbf{Mehrstufige Experimente:} Hier wird ein Zufallsexperiment
+			$(\Om_1, \sA_1, P_1)$ n-fach wiederholt. Man erhält $\Om = \Om_1 \times 
+			... \times \Om_1 = (\Om_1)^n,\ \sA = \sA_1 \otimes ... \otimes \sA_1$ und
+			für das zugehörige Maß P gilt, falls $|\Om_1| < \infty$, die Darstellung
+			$P(\{x_1, ..., x_n\}) = P_1(\{x_1\}) \cdot P_1(x_1; \{x_2\}) \cdot ...
+			\cdot P_1(x_1, ..., x_{n-1};\{x_n\})$ wobei $P(x_1, ..., x_k; -)$  die 
+			Übergangswahrscheinlichkeit für die $k$-te Wiederholung ist (Abhängig von
+			$x_1, ..., x_k)$).
+
+			\textbf{Beispiel:} Ziehen \textbf{ohne} Zurücklegen von zwei Kugeln aus
+				einer Urne mit zwei schwarzen und einer weißen Kugel. Hier ist $n = 2,\ 
+				\Om_1 = \{ S, W\}$ und $\sA_1 = \Pot(\Om_1)$. Die 
+				Übergangswahrscheinlichkeiten werden durch ein Baumdiagramm beschrieben.
+
+			\begin{center}
+			\begin{tikzpicture}
+				[knoten/.style = {circle, draw = black, fill = white, inner sep=0pt,
+					minimum size = 0.8cm}, scale = 0.72]
+				% Urne mit Bällen
+				\draw (0, 0.5) -- ++(0, -1) -- ++(3, 0) -- ++(0, 1);
+				\filldraw[black](0.5, 0) circle[radius = 0.3]
+												(1.5, 0) circle[radius = 0.3];
+				\draw (2.5, 0) circle[radius = 0.3];
+				% Baumdiagramm
+				\node (p) at ( 6, 	0.0) [minimum size = 0]{};
+				\node (s)  at ( 9,  1.2) [knoten]{S}	
+					edge [-] node[above, rotate = 21, font=\scriptsize]
+						{$P(\{ S\})=\frac{2}{3}$} (p);
+				\node (ss) at (13,  2.0) [knoten]{S}	
+					edge [-] node[above, rotate = 10, font=\scriptsize]
+						{$P(S;\{ S\})=\frac{1}{2}$} (s);
+				\node (sw) at (13,  0.8) [knoten]{W}	
+					edge [-] node[below,  rotate = 355, font=\scriptsize]
+						{$P(S;\{ W\})=\frac{1}{2}$} (s);
+				\node (w)  at ( 9, -1.2) [knoten]{W}	
+					edge [-] node[below, rotate = 339, font=\scriptsize]
+						{$P(\{ W\})=\frac{1}{2}$} (p);
+				\node (ws) at (13, -0.8) [knoten]{S}	
+					edge [-] node[above, rotate = 5, font=\scriptsize]
+						{$P(W;\{ S\})=1$} (w);
+				\node (ww) at (13, -2.0) [knoten]{W}	
+					edge [-] node[below,  rotate = 350, font=\scriptsize]
+						{$P(W;\{ W\})=0$} (w);
+			\end{tikzpicture}
+			\label{fig: Beispiel 2.3.c}
+			\end{center}
+	\end{enumerate}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definition 2.4}
+	Sei $(\Om, \sA, P)$ ein W-Raum. Dann heißt $P$
+	\begin{enumerate}
+		\item \textbf{auf $\bm{A \in \sA}$ konzentriert}, falls $P(A) = 1$ gilt.
+		\item \textbf{diskret}, falls $P$ auf einer abzählbaren Menge konzentriert
+			ist.
+		\item diskrete W-Räume gestatten folgende Charakterisierungen:
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 2.5} 
+	Sei $(\Om, \sA, P)$ ein W-Raum mit $\{ x\} \in \sA$ für 
+	alle $x \in \Om$, dann ist die Teilmenge $\Om \supseteq \Om_0 := \{ \om \in
+	\Om\ |\ P(\{ \om \} > 0\}$ äquivalent:
+	\begin{enumerate}
+		\item $P$ diskret
+		\item $P(\Om_0) = 1$
+		\item ${ \int_{\Om} f\ dP =  \sum_{x \in \Om_0} 
+			f(x) \cdot P(\{	x\})}$ für alle beschränkten und $\sA$-messbaren 
+			Abbildungen $f:\Om \rightarrow \Real$
+		\item Es gilt $P = \sum_{x \in \Om_0} P(\{ x\}) \cdot \delta_x$\\
+			(Dabei ist a) als Gleichheit von Abbildungen $\sA \rightarrow [0, 1]$ 
+			gemeint, d.h.: $ \forall A \in \sA: P(A) = \sum_{x 
+			\in \Om_0} P(\{ x\}) \cdot \delta_x(A) =  \sum_{x \in A \cap \Om_0} 
+			P(\{ x \})$ ). 
+	\end{enumerate}
+
+	\textbf{Beweis:} Kommt Später!
+
+	\textbf{Beispiel:} Für das Lebesgue-Maß $\lambda$ auf einem Intervall $[a,b]\ 
+		(-\infty < a < b < \infty)$ gilt $\lambda(\{ x\}) = 0$ für alle $x \in \Om =
+		[a,b]$. Es folgt $\Om_0 = \emptyset$ und $\lambda(\Om_0) \neq 1$, also ist 
+		$\frac{1}{|b-a|} \cdot \lambda$ ein nicht diskretes W-Ma0 auf $[a,b]$
+
+\section{Endliche Wahrscheinlichkeitsräume}
+\label{s: 3. Endliche Wahrscheinlichkeitsraeume}
+	In diesem Abschnitt betrachten wir W-Räume $(\Om, \sA, P)$ mit $|\Om| < \infty
+	$ und $\sA = \Pot(\Om)$. Dann ist P diskret, aber wir nehmen \textbf{nicht}
+	an, dass $P\{ x\} = \frac{1}{|\Om|} \forall x \in \Om$ (vgl. 2.3.a).
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definiton 3.1}
+	\begin{enumerate}
+		\item Für $k, n \in \Nat$ heißt $ \binom{n}{k} := 
+				\left \{ \begin{tabular}{cl}
+					$ \frac{n!}{k!(n-k)!}$ &, falls $k \leq n$ \\
+					$0$ &, sonst
+				\end{tabular} \right.$ 
+			der \textbf{Binomialkoeffizient \glqq n über k \grqq}.
+		\item Für $r > 1;\ k_1, ..., k_r \geq 0$ und $n := k_1 + ... + k_r$ heißt $
+			 \binom{n}{k_1, ..., k_r} := \frac{n_1}{(k_1!) \cdot (k_2!)
+			\cdot ...  \cdot (k_r!)}$ \textbf{Multinomialkoeffizient}. 
+
+			\textbf{Beispiel:} Für $n,k \geq 0$ gilt $ \binom{n}{k} = 
+				\binom{n}{k, n-k}$
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 3.2}
+	Sei $M$ eine Menge mit $0 \leq |M| =: n \leq \infty$
+	\begin{enumerate}
+		\item Für $k \geq 0$ besitzt M genau $ \binom{n}{k}$ Teilmengen
+			mit $k$ Elementen, d.h. es gilt $$|\ \{ X\ |\ X \subseteq M \textrm{ mit }  
+			|X| = k\}\ | = \binom{|M|}{k} = \binom{n}{k}$$
+		\item Mit den Bezeichnungen aus 3.1.b ist $(k_1, ..., k_r$ die Anzahl an 
+		Möglichkeiten, n paarweise verschiedene Objekte auf r Schachteln der Größen 
+		$k_1, ..., k_r$ aufzuteilen.
+
+			\textbf{Beispiel:} Es ist $ \binom{n}{k}$ nach 3.2.a. die 
+			Anzahl der k-elementigen Teilmengen von $\{ 1, ..., n\}$, wegen $
+			 \binom{n}{k} = \binom{n}{k, n-k}$ nach 3.2.b aber auch die 
+			Anzahl der Möglichkeiten, die Objekte $\{ 1, ..., n\}$ auf 2 Schachteln 
+			der Größe $k$ und $(n-k)$ zu verteilen.
+
+		\textbf{Beweis:} Kommt später! 
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 3.3}
+	(Urnenmodell) Aus einer Urne mit $n$ paarweise verschiedenen Kugeln werden 
+	k Kugeln nacheinander gezogen. Dann gibt es folgende Anzahl möglicher 
+	Ereignisse:
+
+	\begin{tabular}{|c|c|c|}
+		\hline
+		& mit	zurücklegen & ohne zurücklegen 
+		\tabularnewline \hline
+		unter Beachtung der Reihenfolge & $\displaystyle n^k$ 
+			& $\displaystyle n \cdot (n-1) \cdot ... \cdot (n-k+1)$
+		\tabularnewline \hline
+		ohne Beachtung der Reihenfolge & $\displaystyle \binom{n+k-1}{k}$ 
+			& $\displaystyle \binom{n}{k}$
+		\tabularnewline \hline
+	\end{tabular}
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 3.4}
+	Eine urne beinhalte n (paarweise verschiedene) Kugeln, von denen $m$ weiß und
+	$n-m$ schwarz seien. Man zieht $l$ Kugeln, und $X \in \{ 0, ..., l \}$ sei die
+	Anzahl der gezogenen weißen Kugeln. Bei Annahme eines Laplace Experimentes
+	erhält man folgende Wahrscheinlichkeiten für die Werte von $X$.
+	\begin{enumerate}
+		\item \textbf{Hypergeomerische Verteilung:} Beim Ziehen ohne Zurücklegen
+			ist die Wahrscheinlichkeit für $X=k$ gegeben durch $H(l, m, n)\{ k \} :=
+			\frac{ \binom{n}{k} \binom{n-m}{l-k} }{ \binom{n}{l} }$ für $0 \leq k \leq 
+			\min\{ m, l \}$
+		\item \textbf{Bionomialverteilung:} Bei Ziehen mit Zurücklegen ist die 
+			Wahrscheinlichkeit für $X=k$ gegeben durch $ B(l, p)\{ k \} :=	
+			\binom{l}{k} p^k (1-P)^{l-k} $ für $0 \leq k \leq l$ und $p := 
+			\frac{m}{n}$
+	\end{enumerate}
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Blue]{Definiton}
+\label{ss: Definition 3.5}
+	Sei $(\Om, \sA, P)$ ein W-Raum (nicht notwendig endlich). Für $A, B \in \sA$
+	mit $P(B) \geq 0$ heißt $P(A|B) = \frac{P(A \cap B)}{P(B)}$ die \textbf{
+	bedingte Wahrscheinlichkeit von A unter der Bedingung B}.
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss: Bemerkung 3.6}
+	\begin{enumerate}
+		\item In der Situation von 3.5 ist $(B, \sA \cap B, P(|B|))$ ein W-Raum.
+		\item Sei $\Om = \sum_{i \in \Nat,\ P(B_i) > 0} P(B_i)\ P(A|B_i)$ (
+		Berechnung einer Wahrscheinlichkeit $P(A)$ durch die Fallunterscheidund $
+		\Om = \bigcupdot_{i \in \Nat} B_i$). Fals $A \in \sA$ mit $P(A) \geq
+		0$ gegeben ist gilt:
+		$$ P(B_i|A) = \frac{P(B_i) \cdot P(A|B_i)}{\sum_{j \in \Nat,\ P(B_j)
+		\geq 0}	P(B_j) \cdot P(A|B_j)} \textrm{\hspace{1cm} \textbf{(Formel von 
+		Bayes)}}$$
+	\end{enumerate}
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Violet]{Proposition}
+\label{ss: Proposition 3.7}
+	\textbf{(Einschluss-Ausschluss-Prinzip)} Es seien $(\Om, \sA, P)$ ein W-Raum
+	(nicht unbedingt endlich), $n \geq 1$ und $A_1, ..., A_n \in \sA$. Für eine
+	Teilmenge $J \subseteq I := \{ 1, ..., n \}$ setze $B_J := \bigcap_
+	{j \in J} A_j \cap (\bigcap_{j \in I \backslash J} A_{j}^C) \in 
+	\sA$. Dann gelten:
+	\begin{enumerate}
+		\item Für jede Teilmenge $J \in I$ gilt $P(\bigcap_{k \in K} A_k)
+		= \sum_{K \subseteq J \subseteq K} P(B_J)$
+		\item Für jede Teilmenge $J \in I$ gilt $P(B_J) = \sum_{J 
+			\subseteq K \subseteq J} (-1)^{|K \backslash J|}\ P(\bigcap_
+			{k \in K} A_k)$.\\
+			 Inbesondere gilt:
+		\item $P(\bigcup_{i \in J} A_i) = 1 - P(B_\emptyset) = \sum 
+			_{\emptyset \neq k \subseteq J} (-1)^{|K| + 1}\ P(\bigcap  
+			_{k \in K} A_k)$	also zB. \\
+		$P(A_1 \cup A_2) = P(A_1) + P(A_2) - P(A_1 \cup A_2) \hspace{1cm} (n=2)$\\
+		$P(A_1 \cup A_2 \cup A_3) = P(A_1) + P(A_2) + P(A_3) - P(A_1 \cup A_2) 
+			- P(A_1 \cup A_3) - P(A_2 \cup A_3) + P(A_1 \cup A_2 \cup A_3) 
+			\hspace{1cm} (n=3)$\\
+	\end{enumerate}
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 3.8}
+	(Fixpunktfreie Permutationen) Zwei identische Kartenspiele von je 52 Karten 
+	werden gemischt und nebeneinander gelegt. Dann werden 52 mal die beiden
+	jeweils obersten karten aufgedeckt. Wie hoch ist die Wahrscheinlichkeit
+	wenigstens einmal dieselbe Karte aufzudecken?\\
+	\textbf{Lösung:} Seien $N := 52,\ I := \{ 1, ..., N \},\ \Om := \sum(I) := 
+	\{ \varphi: I \rightarrow I\ |\ \varphi \textrm{ bijektiv} \}$ also $|\Om| =   
+	N!$ und $ (\Om, \Pot(\Om), P(\om) = \frac{1}{|\Om|} \forall \om \in \Om)$ der  
+	zugehörige Laplace W-Raum (vgl. 23.a~).\\
+	Numeriert man die Karten des ersten Stapels als $1, ..., N$ durch, so ist die 
+	Reihenfolge des zweiten Stapels durch genau eine Permutation $\om \in \Om$
+	festgelegt.
+	Da das Mischen fair sein soll, nehmen wir $P(\om) = \frac{1}{|\Om|} \forall
+	\om \in \Om$ an. Das fragliche Ereignis ist nun
+	$$A := \{ \om \in \Om\ |\ \exists 1 \leq i \leq N: \om(i) = i \} \subseteq
+	\Pot(\Om)$$
+	Offenbar gilt
+	\begin{enumerate}
+		\item $ A = \bigcup_{i \in I} A_i $ 
+		\item $ P(\bigcap_{k \in K} A_k) = \frac{(N-|K|)!}{N!}$ für jede Teilmenge 
+			$K \subseteq I$
+	\end{enumerate}
+
+	Nun folgt 
+		$$P(A) \mathop{=}\limits^{(a)} \sum_{\emptyset \neq K \subseteq I} (-1)^{|K| 
+			+1} \cdot P(\bigcap_{k \in K} A_k) \mathop{=}\limits^{(b)} \sum_{\emptyset 
+			\neq K \subseteq I} (-1)^{|K|+1} \cdot \frac{ (N-|K|)! }{N!} $$
+	(Summanden hängen von $K$ nur über $|K|$ ab.)
+
+	\begin{align*}
+		&\sum_{k=1}^N (-1)^{|K|+1} \cdot \frac{ (N-|K|)! }{N!} \cdot |\ \{ k\ |\ 
+			\emptyset \neq K \subseteq I: |K| = k\}\ | = \\ 
+		= &\sum_{k = 1}^N (-1)^{k+1} \cdot \frac{(N-k)}{N!} \cdot \binom{N}{k} = \\
+		= &\sum_{k=1}^N (-1)^{k+1} \cdot \frac{1}{k!} = \\
+		= &1 - e^{-1} - \underbrace{\sum_{k \geq N + 1}	(-1)^{k+1} \cdot \frac{1}
+			{k!}}_{R(N)}
+	\end{align*}
+
+	Für $N = 52$ ist $|R(N)| \leq \frac{1}{N!} \leq 10^{-60}$, also $P(A) \approx
+	10^{-60}$, also $P(A) \approx 1 - e^{-1} \approx$ 0.63 
+
+	\textbf{Tabelle für kleines N: }
+	\begin{tabular}{c|c|c|c|c}
+		N & 1 & 2 & 3 & 4 
+		\tabularnewline \hline
+		$P(A)$ &\rule{0pt}{3ex} 1 & $\frac{1}{2}$ & $\frac{2}{3}$ & $\frac{3}{8}$ 
+	\end{tabular}
+
+	\textbf{Fixpunkte für $\bm{\om \in \Om = \sum(\{ 1,2,3 \})}$:}
+
+	\begin{tabular}{c|c|c|c|c|c|c}
+			& 1 & 1 & 2 & 2 & 3 & 3 \\
+			& 2 & 3 & 1 & 4 & 1 & 1 \\
+			& 3 & 2 & 3 & 1 & 2 & 1 
+			\tabularnewline \hline
+		Fixpunkte & 3 & 1 & 1 & 0 & 0 & 1
+	\end{tabular}
+	\hspace{1cm} $\displaystyle \rightsquigarrow \hspace{1cm}\frac{4}{6} = 
+		\frac{2}{3} \approx 0.66$
+
+\section{Zufallsvariablen, Erwartungswert und Varianz}
+\label{s: 4. zufallsvariablen, Erwartungswert und Varianz}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definition 4.1}
+	\begin{enumerate}
+		\item Seien $\Om$ eine Menge und $(X_i)_{i \in I}$ eine Familie von 
+			Abbildungen $X_i:\Om \rightarrow S_i$, wobei $(S_i, \sS_i)$ ein Messraum
+			ist. Dann heißt $\sigma((X_i)_{i \in I} := \sigma(\bigcup_{i \in I} 
+			X_i^{-1} (\sS_i)) \subseteq \Pot(\Om)$ \textbf{die von $\bm{(X_i)_{i  
+			\in I}}$ erzeugte $\bm{\sigma}$-Algebra.}
+		\item Seien $(\Om, \sA)$ und $(S,\sS)$ W-Räume. Dann heißt eine Abbildung 
+			$X: \Om \rightarrow S$ eine \textbf{Zufallsfunktion}, falls $X:\sA 
+			\rightarrow \sS$ messbar ist. D.h. wenn für alle $S \in \sS$ gilt: $X^{-1}
+			(\sS) \in \sA$. Das Bildmaß $P \circ X^{-1}: \sS \rightarrow [0,1], B 
+			\rightarrow  P(X^{-1}(B)) =: P(\{ X \in B \})$ heißt die \textbf{
+			Verteilung oder W-Verteilung von X.}
+		\item Nun seien speziell $(S, \sS) = (\Real, \Bor(\Real))$ und $X:(\Om, \sA)
+			\rightarrow (\Real, \Bor(\Real))$ messbar. Dann heißt X \textbf{
+			Zufallsvariable (ZV)}  und die Abblildung $F_X:\Real \rightarrow [0,1], 
+			F_X(t) := P(X^{-1}(-\infty, t]) = P\{ (X \leq t \}$ heißt die 
+			\textbf{Verteilungsfunktion von X.}
+	\end{enumerate}
+
+	Die ZV X heißt \textbf{diskret verteilt}, falls $P \circ X^{-1}$ diskret ist
+	und \textbf{stetig verteilt}, falls $P \circ X^{-1}$ absolutstetig bzgl. des 
+	Lebesgue-Maßes ist. D.h. eine Dichte $f_X$ exisitiert mit $P \circ X^{-1} = 
+	f_X(t)\ d\lambda$ (Gleichheit von Maßen auf $(\Real, \Bor(\Real))$).
+
+\colorsubsection[Violet]{Bemerkung}
+\label{ss: Bemerkung 4.2}
+	\begin{enumerate}
+		\item $F_X$ ist monoton wachsend, rechtsstetig (r.c.), d.h. es gilt 
+			$\lim_{t \rightarrow -\infty} F_X(t+h) = F_X(t)\ \forall\ t \in \Real$, 
+			und es gelten $\lim_{t \rightarrow -\infty} F_X(t) = 0$ und $\lim_{t 
+			\rightarrow + \infty} F_X(t) = 1$. Außerdem gilt für alle $t \in \Real$: 
+			$$ F_X(t) - \lim_{h > 0, h \rightarrow 0} F_X(t-h) = (P \circ X^{-1}(\{ 
+			t\})$$, 
+			also sind die Sprungstellen von $F_X$ genau diejenigen $t \in \Real$ mit
+			$P({X = t}) \neq 0$. 
+		\item $X$ ist genau dann stetig verteilt, wenn $F_X$ absolut stetig ist,
+			d.h. wenn $F_X(t) = \int_{-\infty}^t F_X(s)\ \textrm{ds}$ mit einer  
+			messbaren Funktion $f_X: \Real \rightarrow \Real_f$ und $\int_\Real f_X(s)
+			\textrm{ds} = 1$ gilt(zB. wenn $F_X$ stetig differenzierbar ist).
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.3}
+	Sei $(\Om, \sA, P)$ ein W-Raum.
+	\begin{enumerate}
+		\item Sind $X$ und $Y$ Zufallsvariablen auf $\Om$, so auch $\max\{ X, y \},\
+			\min\{ X, y \},\ |X|$ für $r > 0$ und $X^r$ für $r \in \Nat$	
+		\item Ist ${(X_n)}_{n \in \Nat}$ eine Folge von Zufallsvariablen auf $\Om$, 
+			so sind $\inf_n X_n$, $\sup_n X_n$, $\liminf_n X_n$ und $\limsup_n X_n$ 
+			Zufallsfunktionen von $ \Om$ nach $(\overline{\Nat}, \overline{\Real}$.
+
+			\textbf{Beweis:} Kommt später!
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.4}
+	(Fouriertransformation) Seien $\sM$ die Menge aller W-Maße $(\Real, \Bor(
+	\Real))$ und $\sF$ die Menge aller Abbildungen von $\Real$ nach $\Real$,
+	welche monoton wachsen, r.c. sind und gegen 0 (bzw. 1) konvergieren für $t 
+	\rightarrow -\infty$ (bzw. $+ \infty$). Dann ist die Abbildung
+	$$ \sM \rightarrow \sF,\ \mu \rightarrow F_\mu \textrm{ mit } F_\mu(t) := 
+	\mu( (-1,t])$$ eine Bijektion.
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Defintion 4.5}
+	Zwei ZV $X,Y: \rightarrow (\Om, \sA) \rightarrow (\Real, \Bor(\Real))$ heißen 
+	\textbf{stochastisch äquivalent} (geschrieben $X \sim Y$), falls $P \circ 
+	X^{-1} = P \circ Y^{-1}$.
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 4.6}
+	Für $X \sim Y$ folgt nicht $X = Y$, und noch nicht mal P({X = Y}) = 1, wie 
+	wie folgendes Beispiel zeigt: Es sei $(\Om, \sA, P) := (\{ 0,1 \}, \Pot(\{ 0,1
+	\}), \frac{1}{2}(\delta_0 + \delta_1))$. Setzt man $X(t) := t$ und $Y(t) := 
+	1 - t$ für $t \in \Om$, so ist $P \circ X^{-1} = P \circ Y^{-1} = 1/2(\delta_0
+	+ \delta_1)$, also gilt $X(t) \neq Y(t) \forall t \in \Om$ und damit $P\{ X =
+	Y \} = 0$.
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.7}
+	(Erinnerungen an das Lebesgue-Integral) Seien X und Y Zufallsvariablen auf dem
+	W-Raum $(\Om, \sA, P)$.
+	\begin{enumerate}
+		\item $X$ ist genau dann integrierbar, wenn $\int_\Om |X| dP < \infty$
+		\item (Linearität) Seien $X,Y$ integrierbar auf $a,b \in \Real$. Dann gilt
+			$\int_\Om (aX + bY) dP = a \cdot \int_\Om X dP + b \cdot \int_\Om Y dP$
+		\item Seien $X$ integrierbar, ${(A_n)}_{n \in \Nat}$ paarweise disjunkt und
+			$A := \bigcup_{n \geq 1} A_n$. Dann ist $\int_A X dP = \sum_{n \geq 1} X
+			dP$
+		\item (Positivität) Aus $X \geq 0$ \textbf{P-fast sicher} (P-f.s., d.h. $
+			P\{ \om \in \Om\ |\ X(\om) \leq 0 \}$) folgt $\int_\Om X dP \geq 0$
+		\item (Monotonie) Seien $X, Y$ integrierbar mit $X \leq Y P-f.s.$. Dann gilt
+			$\int_\Om X dP \leq \int_\Om Y dP$
+		\item Seien $X$ integrierbar und $a,b \in \Real$ ist $a \leq X \leq b$ 
+			P-f.s. auf einer Menge $A \in \sA$. Dann gilt $a \cdot P(A) \leq \int_A
+			X dP \leq b \cdot P(A)$
+		\item (Dreiecksungleichung) Für $X$ integrierbar gilt $| \int_\Om X dP |
+			\leq \int_\Om |X| dP$ 
+		\item (Satz von majorisierter Konvergenz) Seien $X_n, X$ und $Y$ 
+			Zufallsvariablen mit 
+			\begin{enumerate}
+				\item ${|X_n| \leq Y}$ P-f.s. $\forall n \in \Nat$
+				\item $\int_\Om Y	dP < \infty$
+				\item $X_n \rightarrow X$ für $n \rightarrow \infty$ P-f.s.
+			\end{enumerate}  
+			Dann gilt: $\lim_{n \rightarrow \infty} \int_\Om X_n dP = \int_\Om X dP$
+		\item (gliedweise Integration) Seien $X_n$ Zufallsvariablen mit $\sum_n 
+			(\int_\Om |X_n| dP) \leq \infty$. Dann gilt $\int_\Om (\sum_n |X_n|) dp 
+			\leq  \infty$ P-f.s. und es gilt $\int_\Om (\sum_n X_n) dP = \sum_n (\int
+			_\Om X_n dp)$
+		\item (Satz von majorisierbarer Konvergenz) Seien $X_n \geq 0$
+			Zufallsvariablen und $X$ eine Zufallsvariable mit $X_n \nearrow X$ für $
+			n \rightarrow \infty$ P-f.s.. Dann gilt $\lim_{n \rightarrow \infty}
+			\int_\Om X_n dP = \int_\Om X dP$ (wobei beide Seiten $+ \infty$ sein 
+			können)
+		\item (Lemma von Fatou) Seien $X_n \geq 0$ Zufallsvariablen. Dann ist
+			$$ \int_\Om \liminf_{n \rightarrow \infty} X_n dP \leq \liminf_{n 
+			\rightarrow \infty} \int_\Om X_n dP$$
+	\end{enumerate}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Defintion 4.8}
+	Sei $X$ eine Zufallsvariable auf dem W-Raum $(\Om, \sA, P)$
+	\begin{enumerate}
+		\item Falls $X \in L^1(P) := \{ X | \int_\Om |X| dP \leq \infty \}$ gilt, so
+			heißt $\E X := \int_\Om X dP$ der \textbf{Erwartungswert von X} (auch 
+			sinnvoll falls X mit möglichem Wert $+\infty$).
+		\item Falls $X \in L^2(P) := \{ X| \int_\Om |X^2| dP < \infty \}$ (und 
+			damit auch $X \in L^1(P)$) gilt, so heißt $\Var X := \E[{(X - \E X)}^2] 
+			= \int_\Om (X - \E X)^2 dP \geq 0$ die \textbf{Varianz von X}. Die Zahl $
+			\sigma X := +\sqrt{\Var(X)}$ heißt \textbf{die Streuung von X}.
+		\item Für $n \geq 1$ heißt $\mu_n := \E(X^n)$ \textbf{das n-te Moment von
+			X} (falls es existiert).
+	\end{enumerate}
+	
+	\textbf{Bemerkung:}
+	\begin{enumerate}
+		\item Die Eigenschaften des Integrals übertragen sich auf den 
+			Erwartungswert, zB. existiert $\E X$ genau dann, wen $\E X \leq \infty
+			$ gilt.
+		\item Es gilt $\E 1 = 1$ 
+		\item Nach dem Transformationslemma gilt $X \in L^1(P)$ genau dann, wenn $
+			id_\Real \in L^1(P \circ X^{-1})$. Die Existenz und der Wert von $\E X$ 
+			und $\Var X$ hängen nur von $P \circ X^{-1}$ ab, nämlich:
+			$$ \E X = \int_\Om X dP = \int_\Real (P \circ X^{-1}) dt \textrm{ für }
+			X \in L^1(P)$$
+		\item Allgemein in c) gilt für $g: \Real \rightarrow \Real$ mit $g \circ X 
+			\in L^1(P)$ (zB. $g: \Real \rightarrow \Com$)
+
+			$$ \int_\Om (g \circ X) dP = \int_\Real g\ d(P \circ X^{-1}) =
+			\left \{\begin{tabular}{cl}
+					$\displaystyle \sum_{x \in \Real} g(x)  \cdot P\{X = x\}$ &, 
+						falls $X$ diskret\\
+					$\displaystyle \int_\Real gf_x d\lambda$ &, 
+						falls $X$ stetig
+			\end{tabular} \right. $$
+
+			$$ \E X = \left \{\begin{tabular}{cl}
+					$\displaystyle \sum_{x \in \Real} x \cdot P\{X = x\}$ &, 
+						falls $X$ diskret\\
+					$\displaystyle \int_\Real f_x d\lambda$ &, 
+						falls $X$ stetig verteilt ist mit Dichte $f_x$
+			\end{tabular} \right. $$
+	\end{enumerate}
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.9}
+	Sei X eine Zufallsvariable auf dem W-Raum $(\Om, \sA, P)$ und $f:\Real
+	\rightarrow \Com$ \textbf{stetig} mit $f \circ X \subseteq L^1(P)$. Dann gilt
+	$\int_\Om (f \circ X) dP = \int_{-\infty}^{\infty} f(t)\ dF_X(t)$, wobei auf
+	der rechten Seite das Riemann-Integral steht (und $F_X$ die Dichtefunktion
+	von X ist.)
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.10}
+	(Diskrete Approximation des Erwartungswerts) Sei X eine Zufallsvariable auf
+	dem W-Raum$(\Om, \sA, P)$. Dann gilt $\E |X| \leq 1 + \sum_{n \geq 1} P\{ 
+	|X| \geq n \}$.
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Orange]{Lemma}
+\label{ss: Lemma 4.11}
+	Seien $(\Om, \sA, P)$ ein W-Raum und $X: \Om \rightarrow \Real$ eine ZV.
+	\begin{enumerate}
+		\item Für $X \in L^2(P)$ ist $\Var X = E(X^2) - (EX)^2$
+		\item Für $X \in L^2(P)$ und $\alpha, \beta \in \Real$ gilt $\Var(\alpha X
+			+ \beta) = \alpha^2 \cdot \Var(X)$
+	\end{enumerate}
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.12}
+	(Ungleichung von Chebychev) Seien $(\Om, \sA, P)$ ein W-Raum, $X: \Om 
+	\rightarrow \Real$ eine ZV, $1 \leq p < \infty$ und es gelte $X \in L^p(P)$ 
+	(d.h. $||X||_{L^p}^p := \int_\Om |X|^p dP < \infty$). Dann gilt für alle $c 
+	> 0$ 
+	$$P\{ |X| \geq c \} \leq \frac{1}{c^p} \cdot ||X||_{L^p}^p$$ 
+	Insbesondere gilt für $X \in L^2(P)$
+	$$ P\{ |X - \E X| \geq c \} \leq \frac{1}{c^2} \cdot \Var (X)$$
+	(daher der Begriff Varianz).
+
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Definition 4.13}
+	Seien $(\Om, \sA, P)$ ein W-Raum und $X, Y: \Om \rightarrow \Real$ ZV. Es 
+	gelte $X, Y, XY \in L^1(P)$ (zB. $X, Y \in L^2(P)$, vgl. Hölderungleichung).
+	Dann heißt $$\Cov(X, Y) := \E [(X - \E X) (Y - \E Y)]$$ \textbf{die Kovarianz
+	von $X$ und $Y$}. Die ZV $X, Y$ heißen \textbf{unkorreliert}, falls $\Cov(X,Y)
+	= 0 $ gilt. Gilt zusätzlich $\Var X, \Var Y > 0$, so heißt $$\rho(X,Y) :=
+	\frac{\Cov(X,Y)}{(\Var X)^{\frac{1}{2}} (\Var Y)^{\frac{1}{2}}}$$ der \textbf{
+	Korrelationskoeffizient von $X$ and $Y$}.
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 4.14}
+	Seien $(\Om, \sA, P)$ ein W-Raum und $X_1, ..., X_n:\Om \rightarrow \Real$ ZV
+	mit $X_1, ..., X_n \in L^2(P)$. Dann gilt 
+	$$\Var (\sum_{i = 1}^n X_i) = \sum_{i=1}^n \Var X_i + \sum_{i,j=1;\ i \neq j}
+	^n \Cov(X_i, X_j)$$
+	Falls $X_1, ... X_n$ paarweise unkorreliert sind, so folgt 
+	$$\Var( \sum_{i=1}^n X_i) = \sum_{i=1}^n \Var X_i \hspace{1 cm}
+	\textrm{(Formel von Bienayme)}$$
+
+	\textbf{Beweis:} Kommt später!
+
+\section{Beispiele wichtiger Wahrscheinlichkeitsverteilungen}
+	Ist $X: (\Om, \sA, P) \rightarrow (\Real, \Bor(\Real))$ eine ZV, so heißt das 
+	Maß $P \circ X^{-1}$ auf $(\Real, \Bor(\Real))$ die Verteilung von X. Viele 
+	Fragen hängen vonn X nur über $P \circ X^{-1}$ (und zB. nicht von $(\Om, \sA, 
+	P)$) ab. Deswegen wird im Folgenden nur das Maß $P \circ X^{-1}$ angegeben 
+	(obwohl weder P noch X definiert sind). 
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 5.1}
+	\begin{enumerate}
+		\item \textbf{Die Gleichverteilung auf $\bm{[a,b]}$} mit $-\infty < a < b <
+			\infty$ ist 
+			$$P \circ X^{-1} := \frac{1}{|b-a|} \cdot 1_{[a,b]} \cdot \lambda$$
+		\item \textbf{Die Binomialverteilung zu den Parametern $\bm{n \in \Nat_{
+			\geq 1}}$	und $\bm{p \in [0,1]}$} ist definiert als 
+			$$ P \circ X^{-1} := B(n;p) := \sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k} 
+			\delta_k$$
+			Es gilt $\E(B(n;p)) = np$ und $\Var(B(n;p)) = np(1-p)$.
+		\item	f
+		\textbf{Die Poissonverteilung zum Parameter $\bm{\lambda > 0}$} ist 
+			definiert als 
+			$$P \circ X := {\Pi_\lambda|}_{\Bor(\Real)}$$
+			wobei $ \Pi_\lambda: \Pot(\Real) \rightarrow [0,1] $ gegeben ist als 
+			$$\Pi_\lambda := \sum_{k=0}^\infty e^{-\lambda} \cdot \frac{\lambda^k}{k!}
+				\cdot \delta_k$$
+			Es ist $X$ diskret verteilt und auf $\Nat_0$ konzentriert. Es gilt $\E X
+			= \Var X = \lambda$. Für $\E X$ sieht man das folgendermaßen: 
+
+			\begin{align*}
+				\E X &= \int_\Real id\ d(P \circ X^{-1}) 
+					= \sum_{k=0}^\infty k \cdot P\{ X = k \} 
+					= \sum_{K=0}^\infty k \cdot e^{-\lambda} \cdot \frac{\lambda^k}{k!} 
+					= \\
+					&= e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^k}{k-1} 
+					= e^{-\lambda} \cdot \lambda \sum_{k=0}^\infty \frac{\lambda^k}{k!}
+					= e^{-\lambda}\cdot \lambda \cdot e^\lambda 
+					= \lambda
+			\end{align*}
+		
+		\item \textbf{Die Exponentialverteilung zum Parameter $\bm{\lambda > 0}$ ist
+			definiert als}
+			$$ P \circ X^{-1} = f_\lambda (t) := 1_{\Real^{+}} (t) \cdot \lambda 
+				e^{-\lambda t}$$ 
+			(d.h. $X$ ist stetig verteilt). Für die Verteilungsfunktion erhält man
+			$$ F_X(t) := \int_{-a}^t f_x(s) ds = \left\{ \begin{tabular}{cl}
+				0, & $t < 0$\\
+				$1 - e^{-\lambda t}$, & $t \geq 0$
+				\end{tabular}
+			\right. $$
+			Es gelten $\E X = \frac{1}{\lambda}$ und $\Var X = \frac{¹}{\lambda^2}$.
+
+
+ 	\end{enumerate}
+
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+
+\section{Kapitel}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\section{Kapitel}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+\colorsubsection[Blue]{Definition}
+
+\colorsubsection[Blue]{Definition}
+\label{ss: Defintion 7.7}
+	Sei $(\Om, \sA, P)$ ein W-Raum und $X_n: \Om \rightarrow \Real $ ZV 
+	$(n \geq 1)$ mit $X_n \in L^1(P)\ \forall n \geq 1$. Dann \textbf{genügt 
+	$\bm{{(X_n)}_n}$ dem Gesetz der großen Zahlen} 
+	$:\Longleftrightarrow$ Für $S_n := X_1 + ... + X_n$ gilt $\frac{S_n - \E S_n}
+	{n} \rightarrow 0$ stochastisch, d.h. wenn gilt
+	$$\forall \epsilon > 0, \delta > 0\ \exists N = N(\epsilon, \delta): \forall
+	n \geq N: {P\left\{ \frac{|S_n - \E S_n|}{n} > \epsilon \right\} < \delta}$$
+
+	\textbf{Bemerkung:} Seien $X_1, X_2, ...$ integrierbare ZV und $\forall i 
+		\geq 1$ gelte $\E X_i = \E X_1 =: \E$. Dann gilt 
+		$$\frac{S_n - \E S_n}{n} =\left( \frac{1}{n} \sum_{i=1}^n X_i\right) - \E$$
+		d.h. man betrachtet in der Def. 7.7 die Differenz zwischen dem Mittelwert 
+		(\glqq rel. Häfuigkeit \grqq) und dem Erwartungswert.
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 7.8}
+	Sei ${(X_n)}_{n \geq1}$ eine Folge unabhängiger ZV, die alle Bernoulliverteilt
+	sind mit Parameter $p = \frac{1}{2}$ (zB. wiederholter Münzwurf einer fairen
+	Münze). Wir sehen in 7.9, dass ${(X_n)}_{n \geq 1}$ dem schwachen Geesetz der
+	großen Zahlen genügt, d.h. es gilt 
+	$$ \forall \epsilon > 0, \delta > 0\ \exists N = N(\epsilon, \delta): \forall
+	n \geq N: P\left\{ \left| \frac{1}{n} \sum_{i=1}^n X_i - \frac{1}{2}  
+	\right| > \epsilon \right\} < \delta$$
+	d.h. die relative Häufigkeit $\frac{1}{n} \sum_{i=1}^n X_i$ nähert sich dem 
+	Erwartungswert $\frac{1}{2}$ beliebig genau an.
+
+	Was ist aber mit den Ereignissen $A_n := \left\{ \frac{1}{n} \sum_{i=1}^n X_i 
+	= \frac{1}{2} \right \}$, d.h. das \textbf{exakte} Übereinstimmen von rel. 
+	Häufigkeit und Erwartungswert? Offenbar gilt $P(A_n) \mathop{\longrightarrow}
+	\limits^{n \rightarrow \infty} 0$. Wir betrachten dazu 
+
+	\textbf{Satz (Stirling-Formel)}
+	$$\forall n \geq 0 \textrm{ gilt } n! = \sqrt{2\pi n} \cdot 
+	n^n e^{-n + \eta(n)} \textrm{ für }	0 < \eta(n) < \frac{1}{12n}$$
+	Insbesondere gilt: 
+	$$\lim_{n \rightarrow \infty} \sqrt{2\pi n} \cdot n^n e^{-n} \cdot 
+	\frac{1}{n!} = \lim_{n \rightarrow \infty} e^{-\eta(n)} = 1 \hspace{1cm}
+	\textrm{ (ohne Beweis)}$$ 
+
+	Damit berechnen wir für $n \geq 1$
+	$$ P\left( \frac{1}{2n} \sum_{k=1}^{2n} X_k = \frac{1}{2}\right) 
+	=	B(2n; \frac{1}{2})(\{ n\}) 
+	= \binom{2n}{n} {\left(\frac{1}{2}\right)}^n {\left(1- \frac{1}{2}\right)}
+		^{2n-n}  
+	= \frac{(2n)!}{(n!)^2} \cdot 2^{-2n}$$
+	und mit Stirling-Formel gilt
+	$$\lim_{n \rightarrow \infty} \frac{(2n)!}{(n!)^2} \cdot 2^{-2n} 
+	= \lim_{n \rightarrow \infty} 
+		\frac{ \sqrt{2\pi 2n} \cdot {(2n)}^{2n} \cdot e^{-2n + \eta(2n)} }
+			{2\pi n \cdot n^{2n} e^{-2n + 2\eta(n)}}
+		\cdot 2^{-2n}
+	= \lim_{n \rightarrow \infty} \frac{1}{\sqrt{\pi n}} = 0	$$
+
+\colorsubsection[Red]{Satz}
+\label{ss: Satz 7.9}
+	\textbf{(Schwaches Gesetz der großen Zahlen)} Sei $(\Om, \sA, P)$ ein
+	W-Raum, $X_n : \Om \rightarrow \Real\ (n \geq 1)$ Zufallsvariablen, ${(X_n)}_
+	{n \geq 1}$	paarweise	unkorreliert (zB. paarweise unabhängig), $X_n \in L^2(P)
+	\ \forall n \geq 1$	und $v := \sup_{n \geq 1} \Var(X_n) < \infty$. Dann gilt
+	$$ \forall \epsilon > 0: P\left( \left| \frac{1}{2} \sum_{i=1}^n (X_i 
+		- \E X_i ) \right| \geq \epsilon \right) \leq \frac{v}{n \epsilon^2} 
+		\hspace{1cm} \textrm{($\star$)}$$
+	Insbesondere gilt 
+	$$\frac{1}{2} \sum_{i=1}^n (X_i	- \E X_i) \rightarrow 0 \textrm{ stochastisch}
+	$$
+	d.h. ${(X_n)}_{n \geq 1}$ genügt dem schwachen Gesetz der großen Zahlen. Gilt
+	zusätzlich 
+	$$\E X_n = \E X_1\ \forall n \geq 1$$
+	so gilt 
+	$$\frac{1}{n} \sum_{i = 1}^n X_i \rightarrow \E X_1 \textrm{ stochastisch}$$
+	\textbf{Beweis:} Kommt später!
+
+\colorsubsection[Green]{Beispiel}
+\label{ss: Beispiel 7.10}
+	In einem Gefäß befinden sich $n = \frac{1}{4} \cdot 10^{23}$ Gasmoleküle, die
+	sich jeweils unabhängig voneinander mit gleicher Wahrscheinlichkeit in der 
+	linken oder rechten Seite des Gefäßes befinden. Wie hoch ist die 
+	Wahrscheinlichkeit, dass sich in der rechten Kammer mindestens $\frac
+	{1 + 10^{-8}}{2}$ aller Teilchen befinden. Seien $X_1, ..., X_n$ unabhängige,
+	zum Parameter $p = \frac{1}{2}$ Binomialverteilte ZV ($X_i = 0$ heißt \glqq
+	i-tes Teilchen in der linken Hälfte\grqq).
+	\begin{align*}
+		P\left( \frac{1}{n} \sum_{i=1}^n X_i \geq \frac{1+10^8}{2}  \right) 
+			& \symtext{=}{Symmetrie}
+		\frac{1}{2} P \left( \left| \frac{1}{n} \sum_{i=1}^n \left( X_i - 
+			\frac{1}{2} \right)	\right| \geq \frac{10^{-8}}{2} \right) 
+			\symtext{\leq}{($\star$) in 7.9}
+		\frac{1}{2} \cdot \frac{\Var X_1}{n(\frac{1}{2} \cdot 10^{-8})} \\
+			& \symtext{=}{$\Var X_1 = \frac{1}{4}$}
+		\frac{1}{2} \cdot \frac{1}{4n \cdot 10^{-16}} 
+			\symtext{=}{$n = \frac{1}{4} \cdot 10^{23}$}
+		2 \cdot 10^{-7}
+	\end{align*}
+	(Man kann sogar zeigen, dass $P\left( \frac{1}{n} \sum_{i=1}^n X_i \geq 
+	\frac{1+10^8}{2}  \right) < 10^{-50000}$. Tschebychev sehr grobe
+	Abschätzung!)
+
+\colorsubsection[Blue]{Defintion und Satz}
+\label{ss: Definition und Satz 7.11}
+	Seien $n \geq 1, \mu_1, ..., \mu_n$ endliche Maße auf $(\Real, \Bor(\Real))$ 
+	(z.B. W-Maße) und $A_n: \Real^n \rightarrow \Real$ definiert durch $A_n
+	((x_1, ..., x_n)) := x_1 + ... + x_n$. Dann heißt das Maß 
+	$$\mu_1 * ... * \mu_n	:= (\mu_1 \otimes ... \otimes \mu_n) \circ A_n^{-1} 
+	\textrm{ auf } (\Real, \Bor(\Real)) $$ 
+	\textbf{das Faltungsprodukt der Maße $\mu_1, ..., \mu_n$}.\\
+	Gilt $\mu_i = P \circ X_i^{-1}$ für unabhängige Zufallsvariablen $X_1, ..., 
+	X_n$, so folgt 
+	$$ P \circ {(\sum_{i=1}^n X_i)}^{-1} = \mu_1 * ... * \mu_n = 
+		(P \circ X_1^{-1}) * ... * (P \circ X_n^{-1})$$
+
+	\textbf{Beweis:} Kommt später!
+
+
+	\end{document}
+

@@ -1,0 +1,87 @@
+%%% Packages
+  \usepackage{ucs}
+  \usepackage[utf8x]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[ngerman]{babel}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{amsfonts}
+  \usepackage{lmodern}
+  \usepackage{enumitem}
+  \usepackage{bm}
+  \usepackage{xcolor}
+  \usepackage{sectsty}
+  \usepackage{tikz}
+  \usepackage{caption}
+  \usepackage{array}
+  \usepackage{tabularx}
+  \usepackage{tabulary}
+
+%%% Settings
+  \setenumerate[1]{label={\alph*)}}
+  \setenumerate[0]{label={\roman*)}}
+  \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,
+    fit,petri}
+
+%%% Definitions
+  \definecolor{Green}{rgb}{0.0, 0.6, 0.0}
+  \definecolor{Blue}{rgb}{0.0, 0.0, 0.6}
+  \definecolor{Red}{rgb}{0.6, 0.0, 0.0}
+  \definecolor{Orange}{rgb}{0.9, 0.5, 0.1}
+  \definecolor{Violet}{rgb}{0.6, 0.2, 0.8}
+
+
+%%% Commands
+
+% Disjoint union and intersection
+  \makeatletter
+  \def\moverlay{\mathpalette\mov@rlay}
+  \def\mov@rlay#1#2{\leavevmode\vtop{%
+     \baselineskip\z@skip \lineskiplimit-\maxdimen
+     \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+  \newcommand{\charfusion}[3][\mathord]{
+      #1{\ifx#1\mathop\vphantom{#2}\fi
+          \mathpalette\mov@rlay{#2\cr#3}
+        }
+      \ifx#1\mathop\expandafter\displaylimits\fi}
+  \makeatother
+
+  \newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+  \newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+  \newcommand{\capdot}{\charfusion[\mathbin]{\cap}{\cdot}}
+  \newcommand{\bigcapdot}{\charfusion[\mathop]{\bigcap}{\cdot}}
+
+% Powerset and other setnames
+  \newcommand{\Pot}{\mathcal{P}}
+  \newcommand{\Bor}{\mathcal{B}}
+  \newcommand{\sD}{\mathcal{D}}
+  \newcommand{\sA}{\mathcal{A}}
+  \newcommand{\sE}{\mathcal{E}}
+  \newcommand{\sR}{\mathcal{R}}
+  \newcommand{\sS}{\mathcal{S}}
+  \newcommand{\sM}{\mathcal{M}}
+  \newcommand{\sF}{\mathcal{F}}
+  \newcommand{\Om}{\Omega}
+  \newcommand{\om}{\omega}
+
+% real and natural numbers
+  \newcommand{\Nat}{\mathbb{N}}
+  \newcommand{\Real}{\mathbb{R}}
+  \newcommand{\Com}{\mathbb{C}}
+
+% Varianz, Kovarianz and Expected Value
+  \newcommand{\Var}{\textrm{Var}}
+  \newcommand{\E}{\textrm{E}}
+  \newcommand{\Cov}{\textrm{Cov}}
+
+%coloured subsections
+  \newcommand{\colorsubsection}[2][black]{
+      \subsectionfont{\color{#1}}
+      \subsection{#2}
+      \subsectionfont{\color{black}}
+  }
+
+% Text over symbols
+  \newcommand{\symtext}[2]{
+    \mathop{#1} \limits^{\mathop{\downarrow} \limits^{\textrm{#2}}}
+  }
